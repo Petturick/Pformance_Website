@@ -8,23 +8,32 @@ import {
   Layers3,
   LineChart,
   Mail,
+  MapPin,
   MessageSquare,
   Route,
   Sparkles,
   Wrench,
 } from "lucide-react";
+import SiteLink from "./SiteLink";
 import type { Action, Block, Page } from "../content/site";
+import { siteConfig } from "../config/site";
 
 const featureIcons = [Route, Wrench, FlaskConical, FileText, LineChart, Layers3, Sparkles];
 
 function ActionLink({ action }: { action: Action }) {
   const style = action.style ?? "primary";
-  const className = style === "primary" ? "button button-primary" : style === "secondary" ? "button button-secondary" : "text-link";
+  const className =
+    style === "primary"
+      ? "button button-primary"
+      : style === "secondary"
+        ? "button button-secondary"
+        : "text-link";
+
   return (
-    <a className={className} href={action.href}>
+    <SiteLink className={className} href={action.href}>
       {action.label}
       {style === "ghost" ? <ArrowRight size={16} /> : <ArrowUpRight size={16} />}
-    </a>
+    </SiteLink>
   );
 }
 
@@ -52,6 +61,7 @@ function BrandVisual({ variant = "orbit" }: { variant?: Page["hero"]["visual"] |
 
 export function PageHero({ page }: { page: Page }) {
   const { hero } = page;
+
   return (
     <section className="page-hero">
       <div className="shell hero-grid">
@@ -89,7 +99,12 @@ function FeatureGrid({ block }: { block: Extract<Block, { type: "features" }> })
                 {item.href ? <span className="card-link">Lees meer <ArrowRight size={15} /></span> : null}
               </>
             );
-            return item.href ? <a className="feature-card interactive-card" href={item.href} key={item.title}>{body}</a> : <article className="feature-card" key={item.title}>{body}</article>;
+
+            return item.href ? (
+              <SiteLink className="feature-card interactive-card" href={item.href} key={item.title}>{body}</SiteLink>
+            ) : (
+              <article className="feature-card" key={item.title}>{body}</article>
+            );
           })}
         </div>
       </div>
@@ -140,7 +155,7 @@ function CasesBlock({ block }: { block: Extract<Block, { type: "cases" }> }) {
               <p>{item.challenge}</p>
               <p className="case-label">Publicatie</p>
               <p>{item.publication}</p>
-              {item.href ? <a className="text-link" href={item.href}>Bekijk case <ArrowRight size={15} /></a> : null}
+              {item.href ? <SiteLink className="text-link" href={item.href}>Bekijk case <ArrowRight size={15} /></SiteLink> : null}
             </article>
           ))}
         </div>
@@ -164,7 +179,7 @@ function ResourcesBlock({ block }: { block: Extract<Block, { type: "resources" }
               </div>
               <div className="resource-meta">
                 <span>{item.status}</span>
-                {item.href ? <a className="text-link" href={item.href}>Open <ArrowUpRight size={15} /></a> : null}
+                {item.href ? <SiteLink className="text-link" href={item.href}>Open <ArrowUpRight size={15} /></SiteLink> : null}
               </div>
             </article>
           ))}
@@ -176,6 +191,7 @@ function ResourcesBlock({ block }: { block: Extract<Block, { type: "resources" }
 
 function SplitBlock({ block }: { block: Extract<Block, { type: "split" }> }) {
   const tone = block.tone ?? "light";
+
   return (
     <section className={`section-block split-section split-${tone}`}>
       <div className="shell split-grid">
@@ -239,7 +255,7 @@ function ContactBlock({ block }: { block: Extract<Block, { type: "contact" }> })
     const message = String(form.get("message") ?? "");
     const subject = encodeURIComponent(`Kennismaking Pformance - ${company || name}`);
     const body = encodeURIComponent(`Naam: ${name}\nE-mail: ${email}\nBedrijf: ${company}\nRoute: ${route}\n\nVraagstuk:\n${message}`);
-    window.location.href = `mailto:hello@pformance.nl?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -249,11 +265,24 @@ function ContactBlock({ block }: { block: Extract<Block, { type: "contact" }> })
           <p className="eyebrow">Contact</p>
           <h2>{block.title}</h2>
           <p>{block.intro}</p>
+
           <div className="contact-direct">
             <Mail size={18} />
-            <div><span>E-mail</span><a href="mailto:hello@pformance.nl">hello@pformance.nl</a></div>
+            <div>
+              <span>E-mail</span>
+              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+            </div>
+          </div>
+
+          <div className="contact-direct">
+            <MapPin size={18} />
+            <div>
+              <span>Vestiging</span>
+              <p className="contact-address">{siteConfig.address.street}<br />{siteConfig.address.postalCode} {siteConfig.address.city}, {siteConfig.address.country}</p>
+            </div>
           </div>
         </div>
+
         <form className="contact-form" onSubmit={submit}>
           <div className="form-grid">
             <label>Naam<input name="name" required autoComplete="name" /></label>
