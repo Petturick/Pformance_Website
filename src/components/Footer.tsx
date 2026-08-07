@@ -1,57 +1,36 @@
-interface FooterProps {
-  scrollTo: (id: string) => void;
-}
+import BrandLogo from "./BrandLogo";
+import { navItems } from "../content/site";
 
-export default function Footer({ scrollTo }: FooterProps) {
-  const cols = [
-    {
-      title: "Practices",
-      links: [
-        { label: "Advisory", id: "advisory" },
-        { label: "Build", id: "build" },
-        { label: "Lab", id: "lab" },
-        { label: "Resources", id: "resources" },
-      ],
-    },
-  ];
-
+export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-inner">
+    <footer className="site-footer">
+      <div className="shell footer-grid">
         <div className="footer-brand">
-          <div className="footer-logo">
-            <span className="logo-mark">P</span>
-            <span className="logo-text">Pformance</span>
-          </div>
-          <p className="footer-tagline">
-            Advisory · Build · Lab · Resources
-          </p>
-          <p className="footer-legal">
-            © {new Date().getFullYear()} Pformance B.V. All rights reserved.
-          </p>
+          <a href="/" aria-label="Pformance home"><BrandLogo /></a>
+          <p>Strategisch. Duidelijk. Presteren.</p>
+          <p className="footer-small">Van commerciële uitdaging naar werkende oplossing.</p>
         </div>
-        {cols.map((col) => (
-          <div key={col.title} className="footer-col">
-            <h4 className="footer-col-title">{col.title}</h4>
-            <ul className="footer-links">
-              {col.links.map((link) => (
-                <li key={link.id}>
-                  <button onClick={() => scrollTo(link.id)}>{link.label}</button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-        <div className="footer-col">
-          <h4 className="footer-col-title">Company</h4>
-          <ul className="footer-links">
-            <li>Rotterdam, The Netherlands</li>
-            <li>KvK 90000000</li>
-            <li>
-              <a href="mailto:hello@pformance.nl">hello@pformance.nl</a>
-            </li>
-          </ul>
+
+        <div>
+          <h2 className="footer-heading">Navigatie</h2>
+          <nav className="footer-nav" aria-label="Footer navigatie">
+            {navItems.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+          </nav>
         </div>
+
+        <div>
+          <h2 className="footer-heading">Pformance</h2>
+          <div className="footer-nav">
+            <a href="/klantcases">Klantcases</a>
+            <a href="/resources">Resources</a>
+            <a href="/over">Over Pformance</a>
+            <a href="mailto:hello@pformance.nl">hello@pformance.nl</a>
+          </div>
+        </div>
+      </div>
+      <div className="shell footer-bottom">
+        <span>© {new Date().getFullYear()} Pformance B.V.</span>
+        <span>Strategisch. Duidelijk. Presteren.</span>
       </div>
     </footer>
   );
