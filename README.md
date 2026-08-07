@@ -8,6 +8,8 @@ and **Resources**.
 
 Central message: _"Van commerciële uitdaging naar werkende oplossing."_
 
+The initial production-ready foundation includes the **Pformance Brand System v1.0** (Deep Navy / Performance Blue / Teal / Off White palette, Inter Tight + Inter typography, monogram, Signal Grid and Performance Slash visual language) applied across all core components. A CI quality gate runs ESLint, TypeScript type-check, and the production Next.js build on every push and pull request.
+
 ## Tech stack
 
 | Concern    | Choice                            |
