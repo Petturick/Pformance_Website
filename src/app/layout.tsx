@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
+import { Inter, Inter_Tight } from "next/font/google";
 import type { ReactNode } from "react";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter-tight",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -29,9 +42,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.legalName }],
   creator: siteConfig.legalName,
   publisher: siteConfig.legalName,
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
@@ -60,8 +71,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang={siteConfig.lang} className="h-full antialiased">
-      <body className="flex min-h-full flex-col bg-white text-zinc-950">
+    <html
+      lang={siteConfig.lang}
+      className={`${inter.variable} ${interTight.variable} h-full antialiased`}
+    >
+      <body className="flex min-h-full flex-col bg-brand-off text-brand-navy">
         <Navigation />
         <main id="main" className="flex-1">
           {children}
