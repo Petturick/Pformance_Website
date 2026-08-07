@@ -1,155 +1,200 @@
 # Pformance Website
 
-Corporate website for **Pformance B.V.** — [www.prformance.nl](https://www.prformance.nl)
+Corporate website for **Pformance B.V.** at **https://pformance.nl**.
 
-Pformance combines strategic marketing leadership, digital product development and
-practical execution. The site presents four areas: **Advisory**, **Build**, **Lab**
-and **Resources**.
+Pformance combines marketing leadership, digital product development and practical execution. The core promise is:
 
-Central message: _"Van commerciële uitdaging naar werkende oplossing."_
+> Van commerciële uitdaging naar werkende oplossing.
 
-The initial production-ready foundation includes the **Pformance Brand System v1.0** (Deep Navy / Performance Blue / Teal / Off White palette, Inter Tight + Inter typography, monogram, Signal Grid and Performance Slash visual language) applied across all core components. A CI quality gate runs ESLint, TypeScript type-check, and the production Next.js build on every push and pull request.
+The website follows **Pformance Brand Guide v1.0** and is intentionally built as a calm, modular, multi-route experience rather than a one-page scrolling site.
 
-## Tech stack
+## Technology
 
-| Concern    | Choice                            |
-| ---------- | --------------------------------- |
-| Framework  | Next.js 16 (App Router, Turbopack) |
-| Language   | TypeScript (strict)               |
-| Styling    | Tailwind CSS v4 (CSS-first config) |
-| Linting    | ESLint (`eslint-config-next`)     |
-| Formatting | Prettier                          |
+- React 18
+- TypeScript, strict mode
+- Vite
+- Lucide outline icons
+- CSS design system in `src/styles/global.css`
+- Netlify SPA fallback for direct route navigation
 
-There is no database, CMS, authentication or payment integration yet. All content
-lives in typed data files under `src/data/`.
+## Routes
 
-## Getting started
+- `/` Home
+- `/advisory`
+- `/build`
+- `/klantcases`
+- `/lab`
+- `/resources`
+- `/over`
+- `/contact`
 
-```bash
-npm install
-cp .env.example .env.local
-npm run dev
-```
+`Klantcases` is a permanent primary navigation item for validated reference cases.
 
-The site runs on http://localhost:3000.
+## Canonical website configuration
 
-## Scripts
+The domain and company details are maintained centrally in:
 
-| Script              | Description                            |
-| ------------------- | -------------------------------------- |
-| `npm run dev`       | Start the development server           |
-| `npm run build`     | Production build                       |
-| `npm run start`     | Serve the production build             |
-| `npm run lint`      | Run ESLint                             |
-| `npm run typecheck` | Type-check with `tsc --noEmit`         |
-| `npm run format`    | Format `src/` with Prettier            |
+`src/config/site.ts`
 
-## Environment variables
+The canonical production domain is **https://pformance.nl**. Do not introduce a second domain in metadata, canonicals, sitemap, robots, documentation or content.
 
-See `.env.example`.
+## Content editing
 
-| Variable               | Required | Description                                                     |
-| ---------------------- | -------- | --------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | No       | Absolute base URL used for metadata, canonicals, sitemap, robots. Defaults to `https://www.prformance.nl`. |
+Normal content maintenance happens in:
 
-## Project structure
+`src/content/site.ts`
 
-```
-src/
-  app/
-    layout.tsx            Root layout: metadata, navigation, footer
-    page.tsx              Home
-    advisory/page.tsx     Advisory
-    build/page.tsx        Build
-    lab/page.tsx          Lab overview
-    lab/[slug]/page.tsx   Individual Lab project (statically generated)
-    resources/page.tsx    Resources
-    about/page.tsx        About
-    contact/page.tsx      Contact
-    not-found.tsx         404
-    sitemap.ts            MetadataRoute.Sitemap
-    robots.ts             MetadataRoute.Robots
-    globals.css           Tailwind v4 import + @theme tokens
-  components/             Reusable UI components
-  data/                   Typed content: site, services, lab, resources
-  lib/metadata.ts         Shared page metadata helper (incl. Open Graph)
-```
+This file contains navigation, page metadata, hero copy, page block order, services, process steps, customer case placeholders, Lab products and Resources.
 
-## Content model
+For normal text or content changes you should not need to edit React markup or CSS.
 
-All content is typed and edited in `src/data/`:
+## Modular architecture
 
-- **`site.ts`** — site config, navigation, footer links, the two primary CTAs.
-- **`services.ts`** — `advisoryServices` and `buildServices`, plus the process
-  steps and expertise areas used on Home, About and Build.
-- **`lab.ts`** — `labProjects` with `problem`, `solution`, `screenshots`,
-  `technologies`, `status`, `links`, `demoLink` and a per-project `cta`.
-- **`resources.ts`** — planned guides, templates, checklists, calculators and tools.
+The site is separated into four layers.
 
-### Adding a Lab project
+### 1. Brand system
 
-1. Add an entry to `labProjects` in `src/data/lab.ts`.
-2. Place screenshots in `public/lab/<slug>/` and reference them in `screenshots`.
-3. Set `isPlaceholder: false` once the copy is final.
+Visual rules live in `src/styles/global.css` and `src/styles/overrides.css`.
 
-The detail route is statically generated from `generateStaticParams()`, and the
-sitemap picks the project up automatically.
+Core colours from the Brand Guide:
 
-## Placeholder content
+- Pformance Navy `#061C48`
+- Electric Blue `#1F63FF`
+- Teal `#0E9E9A`
+- Cyan `#22C7D8`
+- Slate `#8AA4C4`
+- Soft Gray `#D9DFE8`
+- Off White `#F7F7F4`
+- Dark Graphite `#363D4D`
 
-Content that still needs a real copy pass is marked in two ways:
+The website is Light-first. Dark surfaces are controlled exceptions for proof or technology emphasis.
 
-- `// TODO: Add real content` comments in the data files.
-- `isPlaceholder: true` on Lab projects, which renders a visible
-  "Placeholder content" badge in the UI.
+### 2. Reusable blocks
 
-The three Lab projects (**Syntrx**, **PricingTool**, **Onboarding Platform**) and
-all Resources entries are currently placeholders. No customer numbers, results or
-testimonials are claimed anywhere on the site.
+`src/components/PageBlocks.tsx` contains the reusable page modules:
+
+- page hero
+- feature/service grid
+- process steps
+- customer case grid
+- resource list
+- split text + visual block
+- quote block
+- CTA panel
+- contact block
+
+Pages are composed from ordered blocks instead of being designed as separate templates.
+
+### 3. Content
+
+`src/content/site.ts` contains the normal editable content and block order.
+
+To reorder a page, reorder the entries in that page's `blocks` array.
+
+To remove a section, remove the block from that page. The block component remains reusable elsewhere.
+
+### 4. Site configuration
+
+`src/config/site.ts` contains the canonical domain, company name, email, office address, KVK and VAT information.
+
+## Navigation
+
+Internal navigation uses `src/components/SiteLink.tsx`. It keeps the speed of a single React app while each menu item still has its own real URL. Netlify direct-route fallback ensures external visits and browser refreshes continue to work.
+
+## Adding a Klantcase
+
+Reference cases must be factual and validated. Do not publish a client name, logo, testimonial, metric or result without permission and evidence.
+
+The case structure should support:
+
+- client/company name
+- sector
+- context/challenge
+- approach
+- solution
+- result
+- proof/metrics
+- testimonial, when approved
+- technologies
+- Advisory, Build or Combined category
+- screenshots/assets
+- publication status
+
+The current generic entries deliberately say **Case in voorbereiding** until real reference material is supplied.
+
+## Adding a Lab product
+
+Add or edit the relevant feature entries on the `/lab` page in `src/content/site.ts`.
+
+Use the naming convention:
+
+`Productnaam · A Pformance Lab product`
+
+Lab remains part of the Pformance master brand and never receives its own logo or conflicting colour system.
+
+## Adding a Resource
+
+Add entries to the Resources block in `src/content/site.ts`.
+
+Resources should provide standalone practical value and can be marked `In voorbereiding` until publication.
 
 ## Contact form
 
-`src/components/ContactForm.tsx` has no backend. Submitting composes a `mailto:`
-message to the address in `siteConfig.email`. Replace this with a Route Handler or
-form provider when an email/CRM integration is available.
+The current website does not fake a backend submission.
 
-## Styling
+The contact form composes an email to `hello@pformance.nl` in the visitor's own email application. Replace this fallback only when a real backend, CRM or form provider is connected and tested end to end.
 
-Tailwind CSS v4 is configured CSS-first in `src/app/globals.css`:
+## SEO and GEO
 
-- `@import "tailwindcss";`
-- `@theme { ... }` for the font stack and brand colour tokens.
+- route-specific titles and descriptions come from `src/content/site.ts`
+- canonical URLs always use `https://pformance.nl`
+- `public/sitemap.xml` contains all primary routes
+- `public/robots.txt` references the canonical sitemap
+- Organization structured data is generated from `src/config/site.ts`
+- copy uses concrete Pformance terminology consistently
 
-There is no `tailwind.config.js`. The palette is zinc-based with a blue accent for
-interactive elements.
+## Accessibility and UX
 
-## Accessibility
+- semantic landmarks and heading hierarchy
+- keyboard-usable navigation
+- visible focus states
+- 44px minimum primary interaction targets where relevant
+- body copy at least 16px
+- strong Navy/White contrast
+- `prefers-reduced-motion` respected
+- no carousels
+- no decorative technical grid backgrounds
+- no walls of text when a dedicated route is more appropriate
 
-- Semantic landmarks (`header`, `nav`, `main`, `section`, `article`, `footer`).
-- One `h1` per page and a consistent heading hierarchy.
-- Skip link to `#main`, keyboard-operable mobile menu with `aria-expanded`,
-  `aria-controls` and Escape-to-close.
-- Visible `:focus-visible` outlines and `aria-current="page"` on active nav items.
-- `prefers-reduced-motion` respected.
+## Local development
 
-## SEO
+```bash
+npm install
+npm run dev
+```
 
-- Per-page metadata via `createPageMetadata()` in `src/lib/metadata.ts`, including
-  canonical URLs, Open Graph and Twitter cards.
-- `sitemap.xml` and `robots.txt` generated by `src/app/sitemap.ts` and
-  `src/app/robots.ts`.
-- JSON-LD `SoftwareApplication` markup on Lab project pages.
+Production validation:
+
+```bash
+npm run typecheck
+npm run build
+```
 
 ## Deployment
 
-The site is fully static and deploys to any Next.js-compatible host. Set
-`NEXT_PUBLIC_SITE_URL` to the production URL so metadata and the sitemap resolve
-to absolute URLs.
+Netlify publishes the `dist` directory. `public/_redirects` provides the fallback required for direct visits to `/advisory`, `/build`, `/klantcases` and the other routes.
 
-```bash
-npm run build
-npm run start
-```
+## Governance
+
+When design choices conflict, use this order:
+
+1. Brand consistency
+2. Readability
+3. Simplicity
+4. Proof
+5. Decoration
+
+If a page feels crowded, remove elements before making everything smaller.
 
 ---
 

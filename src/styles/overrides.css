@@ -1,0 +1,44 @@
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  transform: translateY(-140%);
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #061C48;
+  color: #F7F7F4;
+  font-weight: 600;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.footer-company span {
+  color: #363D4D;
+  font-size: 13px;
+}
+
+.contact-address {
+  margin: 2px 0 0;
+  color: #061C48;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.site-logo,
+.nav-link,
+.mobile-nav-link,
+.feature-card,
+.text-link,
+.button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}

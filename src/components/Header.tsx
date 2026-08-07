@@ -1,44 +1,77 @@
 import { Menu, X } from "lucide-react";
+import BrandLogo from "./BrandLogo";
+import SiteLink from "./SiteLink";
+import { navItems } from "../content/site";
 
-interface HeaderProps {
+type HeaderProps = {
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
-  scrollTo: (id: string) => void;
+  currentPath: string;
+};
+
+function isActive(currentPath: string, href: string) {
+  return currentPath === href || currentPath.startsWith(`${href}/`);
 }
 
-export default function Header({ menuOpen, setMenuOpen, scrollTo }: HeaderProps) {
-  const navItems = [
-    { id: "advisory", label: "Advisory" },
-    { id: "build", label: "Build" },
-    { id: "lab", label: "Lab" },
-    { id: "resources", label: "Resources" },
-  ];
+export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderProps) {
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="header" id="top">
-      <div className="header-inner">
-        <button className="logo" onClick={() => scrollTo("top")}>
-          <span className="logo-mark">P</span>
-          <span className="logo-text">Pformance</span>
-        </button>
-        <nav className="header-nav">
+    <header className="site-header">
+      <div className="site-header-inner shell">
+        <SiteLink className="site-logo" href="/" aria-label="Pformance home" onClick={closeMenu}>
+          <BrandLogo />
+        </SiteLink>
+
+        <nav className="desktop-nav" aria-label="Hoofdnavigatie">
           {navItems.map((item) => (
-            <button key={item.id} className="header-nav-link" onClick={() => scrollTo(item.id)}>
+            <SiteLink
+              key={item.href}
+              href={item.href}
+              className={isActive(currentPath, item.href) ? "nav-link is-active" : "nav-link"}
+              aria-current={isActive(currentPath, item.href) ? "page" : undefined}
+            >
               {item.label}
-            </button>
+            </SiteLink>
           ))}
         </nav>
-        <button className="header-cta" onClick={() => scrollTo("contact")}>
-          Get in touch
-        </button>
+
+        <SiteLink className="button button-primary header-action" href="/contact">
+          Plan gesprek
+        </SiteLink>
+
         <button
+          type="button"
           className="menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          aria-label={menuOpen ? "Sluit menu" : "Open menu"}
         >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
+
+      {menuOpen ? (
+        <div className="mobile-nav-panel" id="mobile-navigation">
+          <nav className="mobile-nav shell" aria-label="Mobiele navigatie">
+            {navItems.map((item) => (
+              <SiteLink
+                key={item.href}
+                href={item.href}
+                className={isActive(currentPath, item.href) ? "mobile-nav-link is-active" : "mobile-nav-link"}
+                aria-current={isActive(currentPath, item.href) ? "page" : undefined}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </SiteLink>
+            ))}
+            <SiteLink className="button button-primary mobile-nav-action" href="/contact" onClick={closeMenu}>
+              Plan gesprek
+            </SiteLink>
+          </nav>
+        </div>
+      ) : null}
     </header>
   );
 }
