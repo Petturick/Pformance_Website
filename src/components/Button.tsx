@@ -1,21 +1,23 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "positive";
 type ButtonSize = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex min-h-12 items-center justify-center gap-2 rounded-[12px] font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand-blue disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-zinc-950 text-white hover:bg-zinc-800",
+  primary:
+    "bg-brand-blue text-white shadow-sm hover:bg-brand-blue-dark hover:shadow-md",
   secondary:
-    "border border-zinc-300 bg-white text-zinc-900 hover:border-zinc-400 hover:bg-zinc-50",
-  ghost: "text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100",
+    "border border-brand-navy/20 bg-white text-brand-navy hover:border-brand-navy/40 hover:bg-brand-off",
+  ghost: "text-brand-navy hover:bg-brand-navy/5",
+  positive: "bg-brand-teal text-brand-navy hover:bg-[#2ac5b4]",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  md: "px-5 py-2.5 text-sm",
+  md: "px-5 py-3 text-sm",
   lg: "px-6 py-3 text-base",
 };
 
