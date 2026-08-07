@@ -36,7 +36,7 @@ The domain and company details are maintained centrally in:
 
 `src/config/site.ts`
 
-The canonical production domain is **https://pformance.nl**. Do not introduce `prformance.nl` or a second domain in metadata, canonicals, sitemap, robots, documentation or content.
+The canonical production domain is **https://pformance.nl**. Do not introduce a second domain in metadata, canonicals, sitemap, robots, documentation or content.
 
 ## Content editing
 
