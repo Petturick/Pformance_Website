@@ -1,44 +1,64 @@
 import { Menu, X } from "lucide-react";
+import BrandLogo from "./BrandLogo";
+import { navItems } from "../content/site";
 
-interface HeaderProps {
+type HeaderProps = {
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
-  scrollTo: (id: string) => void;
+  currentPath: string;
+};
+
+function isActive(currentPath: string, href: string) {
+  return currentPath === href || currentPath.startsWith(`${href}/`);
 }
 
-export default function Header({ menuOpen, setMenuOpen, scrollTo }: HeaderProps) {
-  const navItems = [
-    { id: "advisory", label: "Advisory" },
-    { id: "build", label: "Build" },
-    { id: "lab", label: "Lab" },
-    { id: "resources", label: "Resources" },
-  ];
-
+export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderProps) {
   return (
-    <header className="header" id="top">
-      <div className="header-inner">
-        <button className="logo" onClick={() => scrollTo("top")}>
-          <span className="logo-mark">P</span>
-          <span className="logo-text">Pformance</span>
-        </button>
-        <nav className="header-nav">
+    <header className="site-header">
+      <div className="site-header-inner shell">
+        <a className="site-logo" href="/" aria-label="Pformance home">
+          <BrandLogo />
+        </a>
+
+        <nav className="desktop-nav" aria-label="Hoofdnavigatie">
           {navItems.map((item) => (
-            <button key={item.id} className="header-nav-link" onClick={() => scrollTo(item.id)}>
+            <a key={item.href} href={item.href} className={isActive(currentPath, item.href) ? "nav-link is-active" : "nav-link"}>
               {item.label}
-            </button>
+            </a>
           ))}
         </nav>
-        <button className="header-cta" onClick={() => scrollTo("contact")}>
-          Get in touch
-        </button>
+
+        <a className="button button-primary header-action" href="/contact">Plan gesprek</a>
+
         <button
+          type="button"
           className="menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          aria-label={menuOpen ? "Sluit menu" : "Open menu"}
         >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
+
+      {menuOpen ? (
+        <div className="mobile-nav-panel" id="mobile-navigation">
+          <nav className="mobile-nav shell" aria-label="Mobiele navigatie">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={isActive(currentPath, item.href) ? "mobile-nav-link is-active" : "mobile-nav-link"}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a className="button button-primary mobile-nav-action" href="/contact" onClick={() => setMenuOpen(false)}>Plan gesprek</a>
+          </nav>
+        </div>
+      ) : null}
     </header>
   );
 }
