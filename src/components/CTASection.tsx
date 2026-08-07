@@ -12,13 +12,12 @@ type CTASectionProps = {
   description?: ReactNode;
   primaryAction?: Action;
   secondaryAction?: Action;
-  /** Renders on a light background instead of the default dark panel. */
   tone?: "dark" | "light";
 };
 
 export default function CTASection({
   title = "Van commerciële uitdaging naar werkende oplossing.",
-  description = "Een gesprek van een half uur is meestal genoeg om te bepalen of er een goede match is en waar de grootste winst zit.",
+  description = "Leg het vraagstuk op tafel. We bepalen snel waar strategie, marketing of technologie het verschil kan maken en of Pformance de juiste partij is om het ook uit te voeren.",
   primaryAction = ctas.build,
   secondaryAction = ctas.advisory,
   tone = "dark",
@@ -28,37 +27,42 @@ export default function CTASection({
   return (
     <section
       aria-labelledby="cta-heading"
-      className="mx-auto w-full max-w-6xl px-6 py-16 lg:py-24"
+      className="mx-auto w-full max-w-[1200px] px-6 py-16 lg:py-24"
     >
       <div
-        className={`rounded-3xl px-8 py-14 sm:px-14 sm:py-20 ${
+        className={`relative overflow-hidden rounded-[12px] px-8 py-14 sm:px-14 sm:py-20 ${
           isDark
-            ? "bg-zinc-950 text-white"
-            : "border border-zinc-200 bg-zinc-50 text-zinc-950"
+            ? "bg-brand-navy text-white"
+            : "border border-brand-border bg-white text-brand-navy"
         }`}
       >
-        <div className="max-w-2xl">
+        {isDark ? (
+          <>
+            <div className="signal-grid absolute inset-0 opacity-25" />
+            <div className="performance-slash absolute -bottom-20 right-16 h-56 w-16 bg-brand-blue/25" />
+          </>
+        ) : null}
+
+        <div className="relative z-10 max-w-3xl">
+          <p className={`brand-kicker ${isDark ? "!text-blue-300" : ""}`}>
+            Volgende stap
+          </p>
           <h2
             id="cta-heading"
-            className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
+            className="mt-4 font-display text-3xl font-bold tracking-[-0.035em] text-balance sm:text-4xl lg:text-5xl"
           >
             {title}
           </h2>
           <p
-            className={`mt-5 text-base leading-relaxed text-pretty sm:text-lg ${
-              isDark ? "text-zinc-300" : "text-zinc-600"
+            className={`mt-5 max-w-2xl text-base leading-7 text-pretty sm:text-lg sm:leading-8 ${
+              isDark ? "text-slate-300" : "text-slate-600"
             }`}
           >
             {description}
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonLink
-              href={primaryAction.href}
-              size="lg"
-              variant={isDark ? "secondary" : "primary"}
-              className={isDark ? "border-transparent" : undefined}
-            >
+            <ButtonLink href={primaryAction.href} size="lg" variant="primary">
               {primaryAction.label}
             </ButtonLink>
             {secondaryAction ? (
@@ -68,7 +72,7 @@ export default function CTASection({
                 variant="secondary"
                 className={
                   isDark
-                    ? "border-zinc-700 bg-transparent text-white hover:border-zinc-600 hover:bg-zinc-900"
+                    ? "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
                     : undefined
                 }
               >
