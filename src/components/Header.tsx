@@ -1,7 +1,7 @@
 import { Menu, X } from "lucide-react";
 import BrandLogo from "./BrandLogo";
 import SiteLink from "./SiteLink";
-import { navItems } from "../content/site";
+import { navigationItems } from "../config/navigation";
 
 type HeaderProps = {
   menuOpen: boolean;
@@ -24,7 +24,7 @@ export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderPro
         </SiteLink>
 
         <nav className="desktop-nav" aria-label="Hoofdnavigatie">
-          {navItems.map((item) => (
+          {navigationItems.map((item) => (
             <SiteLink
               key={item.href}
               href={item.href}
@@ -55,7 +55,7 @@ export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderPro
       {menuOpen ? (
         <div className="mobile-nav-panel" id="mobile-navigation">
           <nav className="mobile-nav shell" aria-label="Mobiele navigatie">
-            {navItems.map((item) => (
+            {navigationItems.map((item) => (
               <SiteLink
                 key={item.href}
                 href={item.href}
