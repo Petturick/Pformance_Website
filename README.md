@@ -1,12 +1,12 @@
 # Pformance Website
 
-Corporate website for **Pformance B.V.** at **www.prformance.nl**.
+Corporate website for **Pformance B.V.** at **https://pformance.nl**.
 
 Pformance combines marketing leadership, digital product development and practical execution. The core promise is:
 
 > Van commerciële uitdaging naar werkende oplossing.
 
-The website follows **Pformance Brand Guide v1.0** and is built as a modular, multi-route experience rather than a one-page scrolling site.
+The website follows **Pformance Brand Guide v1.0** and is intentionally built as a calm, modular, multi-route experience rather than a one-page scrolling site.
 
 ## Technology
 
@@ -28,62 +28,35 @@ The website follows **Pformance Brand Guide v1.0** and is built as a modular, mu
 - `/over`
 - `/contact`
 
-`Klantcases` is a primary navigation item and is the permanent location for validated reference cases.
+`Klantcases` is a permanent primary navigation item for validated reference cases.
 
-## Local development
+## Canonical website configuration
 
-```bash
-npm install
-npm run dev
-```
+The domain and company details are maintained centrally in:
 
-Production validation:
+`src/config/site.ts`
 
-```bash
-npm run build
-```
+The canonical production domain is **https://pformance.nl**. Do not introduce `prformance.nl` or a second domain in metadata, canonicals, sitemap, robots, documentation or content.
 
-## Modular architecture
-
-The website is intentionally separated into three layers.
-
-### 1. Content
+## Content editing
 
 Normal content maintenance happens in:
 
 `src/content/site.ts`
 
-This file contains navigation, page metadata, hero copy, page block order, services, process steps, reference case entries, Lab products and Resources.
+This file contains navigation, page metadata, hero copy, page block order, services, process steps, customer case placeholders, Lab products and Resources.
 
-For normal copy changes you should **not** need to edit React component markup or CSS.
+For normal text or content changes you should not need to edit React markup or CSS.
 
-### 2. Reusable blocks
+## Modular architecture
 
-Reusable sections are rendered by:
+The site is separated into four layers.
 
-`src/components/PageBlocks.tsx`
+### 1. Brand system
 
-Available blocks include:
+Visual rules live in `src/styles/global.css` and `src/styles/overrides.css`.
 
-- page hero
-- feature/service grid
-- process steps
-- customer case grid
-- resources list
-- split content/visual section
-- quote
-- CTA panel
-- contact form
-
-Pages are therefore composed from reusable blocks instead of separately designed templates.
-
-### 3. Brand system
-
-Visual rules live in:
-
-`src/styles/global.css`
-
-Core brand tokens:
+Core colours from the Brand Guide:
 
 - Pformance Navy `#061C48`
 - Electric Blue `#1F63FF`
@@ -94,23 +67,45 @@ Core brand tokens:
 - Off White `#F7F7F4`
 - Dark Graphite `#363D4D`
 
-The website is Light-first. Dark surfaces are used only where proof or technology needs additional emphasis.
+The website is Light-first. Dark surfaces are controlled exceptions for proof or technology emphasis.
 
-Do not create local colours, arbitrary radii, decorative technical grids or page-specific visual systems. Add new patterns to the reusable system first.
+### 2. Reusable blocks
 
-## Editing a page
+`src/components/PageBlocks.tsx` contains the reusable page modules:
 
-Open `src/content/site.ts`, find the page by its `path`, then edit its `hero` or ordered `blocks` array.
+- page hero
+- feature/service grid
+- process steps
+- customer case grid
+- resource list
+- split text + visual block
+- quote block
+- CTA panel
+- contact block
 
-To reorder a page, reorder entries in `blocks`.
+Pages are composed from ordered blocks instead of being designed as separate templates.
 
-To hide a block, remove it from that page's `blocks` array. The component itself remains reusable elsewhere.
+### 3. Content
+
+`src/content/site.ts` contains the normal editable content and block order.
+
+To reorder a page, reorder the entries in that page's `blocks` array.
+
+To remove a section, remove the block from that page. The block component remains reusable elsewhere.
+
+### 4. Site configuration
+
+`src/config/site.ts` contains the canonical domain, company name, email, office address, KVK and VAT information.
+
+## Navigation
+
+Internal navigation uses `src/components/SiteLink.tsx`. It keeps the speed of a single React app while each menu item still has its own real URL. Netlify direct-route fallback ensures external visits and browser refreshes continue to work.
 
 ## Adding a Klantcase
 
-Reference cases must be factual and validated. Do not publish a client name, testimonial, logo, metric or result without permission and evidence.
+Reference cases must be factual and validated. Do not publish a client name, logo, testimonial, metric or result without permission and evidence.
 
-Add or replace an entry in `casePlaceholders` or create a dedicated case collection in `src/content/site.ts` with:
+The case structure should support:
 
 - client/company name
 - sector
@@ -125,71 +120,79 @@ Add or replace an entry in `casePlaceholders` or create a dedicated case collect
 - screenshots/assets
 - publication status
 
-The current generic entries deliberately say **Case in voorbereiding** until real references are supplied.
+The current generic entries deliberately say **Case in voorbereiding** until real reference material is supplied.
 
 ## Adding a Lab product
 
-Find the `/lab` page in `src/content/site.ts` and add a feature entry. Use the convention:
+Add or edit the relevant feature entries on the `/lab` page in `src/content/site.ts`.
+
+Use the naming convention:
 
 `Productnaam · A Pformance Lab product`
 
-Lab remains part of the Pformance master brand and does not receive its own logo or colour system.
+Lab remains part of the Pformance master brand and never receives its own logo or conflicting colour system.
 
 ## Adding a Resource
 
-Find the `/resources` page and add an entry to the `resources` block. Every item should have a clear type, title, practical description, publication status and optional link.
+Add entries to the Resources block in `src/content/site.ts`.
 
-Resources should provide standalone value rather than existing only as lead gates.
+Resources should provide standalone practical value and can be marked `In voorbereiding` until publication.
 
 ## Contact form
 
-No fake backend confirmation is shown.
+The current website does not fake a backend submission.
 
-The current form composes an email to `hello@pformance.nl` in the visitor's own email application and explicitly states that the website does not yet store form data.
-
-When a real backend, CRM or form service is introduced, replace this fallback only after successful end-to-end testing and privacy review.
-
-## Direct route support
-
-`public/_redirects` contains the Netlify fallback:
-
-```text
-/* /index.html 200
-```
-
-This ensures `/advisory`, `/build`, `/klantcases` and the other direct routes load correctly after refresh or external navigation.
+The contact form composes an email to `hello@pformance.nl` in the visitor's own email application. Replace this fallback only when a real backend, CRM or form provider is connected and tested end to end.
 
 ## SEO and GEO
 
-- route-specific document titles and meta descriptions are managed from `src/content/site.ts`
-- `public/sitemap.xml` lists all primary routes
-- `public/robots.txt` references the production sitemap
-- headings use concrete Pformance terminology consistently
-- customer proof should use factual company, problem, solution and result entities once approved
+- route-specific titles and descriptions come from `src/content/site.ts`
+- canonical URLs always use `https://pformance.nl`
+- `public/sitemap.xml` contains all primary routes
+- `public/robots.txt` references the canonical sitemap
+- Organization structured data is generated from `src/config/site.ts`
+- copy uses concrete Pformance terminology consistently
 
-## Accessibility and UX requirements
+## Accessibility and UX
 
-- body copy is at least 16 px
-- interactive targets are at least 44 px where essential
+- semantic landmarks and heading hierarchy
+- keyboard-usable navigation
 - visible focus states
+- 44px minimum primary interaction targets where relevant
+- body copy at least 16px
 - strong Navy/White contrast
-- semantic heading hierarchy
-- mobile-first responsive layouts
 - `prefers-reduced-motion` respected
 - no carousels
-- no decorative content overload
+- no decorative technical grid backgrounds
+- no walls of text when a dedicated route is more appropriate
 
-## Brand governance
+## Local development
 
-For design decisions, **Pformance Brand Guide v1.0 is the source of truth**.
+```bash
+npm install
+npm run dev
+```
 
-Priority when in doubt:
+Production validation:
 
-1. brand consistency
-2. readability
-3. simplicity
-4. proof
-5. decoration
+```bash
+npm run typecheck
+npm run build
+```
+
+## Deployment
+
+Netlify publishes the `dist` directory. `public/_redirects` provides the fallback required for direct visits to `/advisory`, `/build`, `/klantcases` and the other routes.
+
+## Governance
+
+When design choices conflict, use this order:
+
+1. Brand consistency
+2. Readability
+3. Simplicity
+4. Proof
+5. Decoration
 
 If a page feels crowded, remove elements before making everything smaller.
 
