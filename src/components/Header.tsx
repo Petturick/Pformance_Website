@@ -1,5 +1,6 @@
 import { Menu, X } from "lucide-react";
 import BrandLogo from "./BrandLogo";
+import SiteLink from "./SiteLink";
 import { navItems } from "../content/site";
 
 type HeaderProps = {
@@ -13,22 +14,31 @@ function isActive(currentPath: string, href: string) {
 }
 
 export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderProps) {
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className="site-header">
       <div className="site-header-inner shell">
-        <a className="site-logo" href="/" aria-label="Pformance home">
+        <SiteLink className="site-logo" href="/" aria-label="Pformance home" onClick={closeMenu}>
           <BrandLogo />
-        </a>
+        </SiteLink>
 
         <nav className="desktop-nav" aria-label="Hoofdnavigatie">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className={isActive(currentPath, item.href) ? "nav-link is-active" : "nav-link"}>
+            <SiteLink
+              key={item.href}
+              href={item.href}
+              className={isActive(currentPath, item.href) ? "nav-link is-active" : "nav-link"}
+              aria-current={isActive(currentPath, item.href) ? "page" : undefined}
+            >
               {item.label}
-            </a>
+            </SiteLink>
           ))}
         </nav>
 
-        <a className="button button-primary header-action" href="/contact">Plan gesprek</a>
+        <SiteLink className="button button-primary header-action" href="/contact">
+          Plan gesprek
+        </SiteLink>
 
         <button
           type="button"
@@ -46,16 +56,19 @@ export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderPro
         <div className="mobile-nav-panel" id="mobile-navigation">
           <nav className="mobile-nav shell" aria-label="Mobiele navigatie">
             {navItems.map((item) => (
-              <a
+              <SiteLink
                 key={item.href}
                 href={item.href}
                 className={isActive(currentPath, item.href) ? "mobile-nav-link is-active" : "mobile-nav-link"}
-                onClick={() => setMenuOpen(false)}
+                aria-current={isActive(currentPath, item.href) ? "page" : undefined}
+                onClick={closeMenu}
               >
                 {item.label}
-              </a>
+              </SiteLink>
             ))}
-            <a className="button button-primary mobile-nav-action" href="/contact" onClick={() => setMenuOpen(false)}>Plan gesprek</a>
+            <SiteLink className="button button-primary mobile-nav-action" href="/contact" onClick={closeMenu}>
+              Plan gesprek
+            </SiteLink>
           </nav>
         </div>
       ) : null}
