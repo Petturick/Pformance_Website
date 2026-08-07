@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import BrandLogo from "@/components/BrandLogo";
 import { ButtonLink } from "@/components/Button";
-import { ctas, primaryNav, siteConfig } from "@/data/site";
+import { ctas, primaryNav } from "@/data/site";
 
 function isActive(pathname: string, href: string): boolean {
   if (href === "/") return pathname === "/";
@@ -13,7 +14,6 @@ function isActive(pathname: string, href: string): boolean {
 
 export default function Navigation() {
   const pathname = usePathname();
-  // Derived open state: navigating to another path closes the menu without an effect.
   const [menu, setMenu] = useState({ open: false, path: pathname });
   const isOpen = menu.open && menu.path === pathname;
   const menuId = useId();
@@ -34,26 +34,19 @@ export default function Navigation() {
   }, [isOpen, pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-brand-border/80 bg-brand-off/92 backdrop-blur-md">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-zinc-950 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-[12px] focus:bg-brand-navy focus:px-4 focus:py-2 focus:text-sm focus:text-white"
       >
         Naar hoofdinhoud
       </a>
 
       <nav
         aria-label="Hoofdnavigatie"
-        className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 px-6 lg:h-20"
+        className="mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between gap-6 px-6 lg:h-20"
       >
-        <Link
-          href="/"
-          className="rounded-sm text-lg font-semibold tracking-tight text-zinc-950"
-          aria-label={`${siteConfig.name} — naar de homepage`}
-        >
-          {siteConfig.name}
-          <span className="text-blue-600">.</span>
-        </Link>
+        <BrandLogo />
 
         <ul className="hidden items-center gap-1 lg:flex">
           {primaryNav.map((item) => {
@@ -63,10 +56,10 @@ export default function Navigation() {
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`rounded-full px-4 py-2 text-sm transition-colors ${
+                  className={`rounded-[10px] px-3.5 py-2 text-sm font-medium transition-colors ${
                     active
-                      ? "bg-zinc-100 font-medium text-zinc-950"
-                      : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-950"
+                      ? "bg-brand-navy/[0.06] text-brand-navy"
+                      : "text-slate-600 hover:bg-brand-navy/[0.04] hover:text-brand-navy"
                   }`}
                 >
                   {item.label}
@@ -78,14 +71,14 @@ export default function Navigation() {
 
         <div className="hidden lg:block">
           <ButtonLink href="/contact" variant="primary" size="md">
-            Contact
+            Plan een kennismaking
           </ButtonLink>
         </div>
 
         <button
           ref={toggleRef}
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 text-zinc-900 transition-colors hover:bg-zinc-50 lg:hidden"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-[12px] border border-brand-navy/15 text-brand-navy transition-colors hover:bg-brand-navy/[0.04] lg:hidden"
           aria-expanded={isOpen}
           aria-controls={menuId}
           aria-label={isOpen ? "Menu sluiten" : "Menu openen"}
@@ -114,9 +107,9 @@ export default function Navigation() {
       <div
         id={menuId}
         hidden={!isOpen}
-        className="border-t border-zinc-200 bg-white lg:hidden"
+        className="border-t border-brand-border bg-brand-off lg:hidden"
       >
-        <ul className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-6 py-4">
+        <ul className="mx-auto flex w-full max-w-[1200px] flex-col gap-1 px-6 py-5">
           {primaryNav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -124,15 +117,15 @@ export default function Navigation() {
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex flex-col gap-0.5 rounded-xl px-3 py-3 transition-colors ${
-                    active ? "bg-zinc-100" : "hover:bg-zinc-50"
+                  className={`flex flex-col gap-1 rounded-[12px] px-4 py-3.5 transition-colors ${
+                    active ? "bg-brand-navy/[0.06]" : "hover:bg-brand-navy/[0.04]"
                   }`}
                 >
-                  <span className="text-base font-medium text-zinc-950">
+                  <span className="text-base font-semibold text-brand-navy">
                     {item.label}
                   </span>
                   {item.description ? (
-                    <span className="text-sm text-zinc-500">
+                    <span className="text-sm leading-relaxed text-slate-500">
                       {item.description}
                     </span>
                   ) : null}
@@ -140,7 +133,7 @@ export default function Navigation() {
               </li>
             );
           })}
-          <li className="mt-3 flex flex-col gap-2">
+          <li className="mt-4 flex flex-col gap-2 border-t border-brand-border pt-5">
             <ButtonLink href={ctas.advisory.href} variant="secondary" size="lg">
               {ctas.advisory.label}
             </ButtonLink>
