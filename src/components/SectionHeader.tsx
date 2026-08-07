@@ -3,12 +3,10 @@ import type { ElementType, ReactNode } from "react";
 type Align = "left" | "center";
 
 type SectionHeaderProps = {
-  /** Small label rendered above the title. */
   eyebrow?: string;
   title: ReactNode;
   description?: ReactNode;
   align?: Align;
-  /** Heading level, so pages keep a correct hierarchy. */
   as?: Extract<ElementType, "h1" | "h2" | "h3">;
   className?: string;
   id?: string;
@@ -16,8 +14,8 @@ type SectionHeaderProps = {
 
 const titleSizes: Record<string, string> = {
   h1: "text-4xl sm:text-5xl lg:text-6xl",
-  h2: "text-3xl sm:text-4xl",
-  h3: "text-xl sm:text-2xl",
+  h2: "text-3xl sm:text-4xl lg:text-[2.75rem]",
+  h3: "text-2xl sm:text-3xl",
 };
 
 export default function SectionHeader({
@@ -38,19 +36,15 @@ export default function SectionHeader({
         .filter(Boolean)
         .join(" ")}
     >
-      {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
-          {eyebrow}
-        </p>
-      ) : null}
+      {eyebrow ? <p className="brand-kicker">{eyebrow}</p> : null}
       <Heading
         id={id}
-        className={`${titleSizes[Heading]} font-semibold tracking-tight text-balance text-zinc-950`}
+        className={`${titleSizes[Heading]} font-display font-bold leading-tight tracking-[-0.035em] text-balance text-brand-navy`}
       >
         {title}
       </Heading>
       {description ? (
-        <div className="text-base leading-relaxed text-pretty text-zinc-600 sm:text-lg">
+        <div className="text-base leading-7 text-pretty text-slate-600 sm:text-lg sm:leading-8">
           {description}
         </div>
       ) : null}
