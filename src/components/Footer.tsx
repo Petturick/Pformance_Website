@@ -1,6 +1,6 @@
 import BrandLogo from "./BrandLogo";
 import SiteLink from "./SiteLink";
-import { navItems } from "../content/site";
+import { navigationItems } from "../config/navigation";
 import { siteConfig } from "../config/site";
 
 export default function Footer() {
@@ -18,7 +18,7 @@ export default function Footer() {
         <div>
           <h2 className="footer-heading">Navigatie</h2>
           <nav className="footer-nav" aria-label="Footer navigatie">
-            {navItems.map((item) => (
+            {navigationItems.map((item) => (
               <SiteLink key={item.href} href={item.href}>{item.label}</SiteLink>
             ))}
           </nav>
