@@ -6,19 +6,18 @@
 export const siteConfig = {
   name: "Pformance",
   legalName: "Pformance B.V.",
-  // TODO: Confirm final production domain before launch.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.prformance.nl",
   locale: "nl_NL",
   lang: "nl",
   tagline: "Van commerciële uitdaging naar werkende oplossing.",
   description:
-    "Pformance combineert strategisch marketing leadership, digitale productontwikkeling en praktische executie. Van commerciële uitdaging naar werkende oplossing.",
-  // TODO: Replace with real company contact details.
-  email: "info@prformance.nl",
+    "Pformance verbindt marketing leadership, digitale productontwikkeling en praktische uitvoering. Van commerciële uitdaging naar werkende oplossing.",
+  // Add confirmed public contact channels before launch.
+  email: "",
   phone: "",
   country: "Nederland",
   social: {
-    linkedin: "https://www.linkedin.com/company/pformance",
+    linkedin: "",
   },
 } as const;
 
@@ -37,7 +36,7 @@ export const primaryNav: NavItem[] = [
   {
     href: "/build",
     label: "Build",
-    description: "Digitale producten, tools en integraties die werken.",
+    description: "Software, tools en digitale oplossingen die werken.",
   },
   {
     href: "/lab",
@@ -47,30 +46,32 @@ export const primaryNav: NavItem[] = [
   {
     href: "/resources",
     label: "Resources",
-    description: "Guides, templates en tools. Binnenkort beschikbaar.",
+    description: "Guides, templates, checklists en praktische tools.",
   },
   {
     href: "/about",
-    label: "Over",
-    description: "Waar Pformance voor staat.",
+    label: "Over Pformance",
+    description: "Waarom Pformance bestaat en hoe we werken.",
   },
 ];
 
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
-    title: "Diensten",
+    title: "Pformance",
     items: [
       { href: "/advisory", label: "Advisory" },
       { href: "/build", label: "Build" },
-      { href: "/lab", label: "Lab" },
+      { href: "/lab", label: "Pformance Lab" },
+      { href: "/resources", label: "Resources" },
     ],
   },
   {
-    title: "Kennis",
+    title: "Expertise",
     items: [
-      { href: "/resources", label: "Resources" },
-      { href: "/advisory", label: "Marketing audit" },
-      { href: "/build", label: "AI-toepassingen" },
+      { href: "/advisory", label: "Marketing leadership" },
+      { href: "/advisory", label: "SEO, GEO en AI visibility" },
+      { href: "/build", label: "Software en automatisering" },
+      { href: "/build", label: "PIM en digitale tools" },
     ],
   },
   {
