@@ -4,13 +4,16 @@ type BrandLogoProps = {
 };
 
 export default function BrandLogo({ compact = false, inverse = false }: BrandLogoProps) {
+  const lightSrc = compact ? "/pformance-mark-official.png" : "/pformance-logo-official.png";
+  const darkSrc = compact ? "/pformance-mark-official-dark.png" : "/pformance-logo-official-dark.png";
+
   return (
-    <span className={`brand-logo${inverse ? " brand-logo-forced-inverse" : ""}`} aria-label="Pformance">
-      <span className="brand-logo-marks" aria-hidden="true">
-        <img className="brand-logo-mark brand-logo-mark-light" src="/pformance-mark.svg" alt="" width="48" height="36" />
-        <img className="brand-logo-mark brand-logo-mark-dark" src="/pformance-mark-inverse.svg" alt="" width="48" height="36" />
-      </span>
-      {!compact ? <span className="brand-logo-word">Pformance</span> : null}
+    <span
+      className={`brand-logo brand-logo-image-lockup${compact ? " brand-logo-compact" : ""}${inverse ? " brand-logo-forced-inverse" : ""}`}
+      aria-label="Pformance"
+    >
+      <img className="brand-logo-image brand-logo-image-light" src={lightSrc} alt="" aria-hidden="true" />
+      <img className="brand-logo-image brand-logo-image-dark" src={darkSrc} alt="" aria-hidden="true" />
     </span>
   );
 }
