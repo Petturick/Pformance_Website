@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import BrandLogo from "./BrandLogo";
 import SiteLink from "./SiteLink";
+import ThemeToggle from "../theme/ThemeToggle";
 import { navigationItems } from "../config/navigation";
 
 type HeaderProps = {
@@ -10,6 +11,7 @@ type HeaderProps = {
 };
 
 function isActive(currentPath: string, href: string) {
+  if (href === "/oplossingen" && (currentPath === "/advisory" || currentPath === "/build")) return true;
   return currentPath === href || currentPath.startsWith(`${href}/`);
 }
 
@@ -36,9 +38,12 @@ export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderPro
           ))}
         </nav>
 
-        <SiteLink className="button button-primary header-action" href="/contact">
-          Plan gesprek
-        </SiteLink>
+        <div className="header-tools">
+          <ThemeToggle />
+          <SiteLink className="button button-primary header-action" href="/contact">
+            Plan een gesprek
+          </SiteLink>
+        </div>
 
         <button
           type="button"
@@ -66,8 +71,9 @@ export default function Header({ menuOpen, setMenuOpen, currentPath }: HeaderPro
                 {item.label}
               </SiteLink>
             ))}
+            <div className="mobile-theme"><ThemeToggle /></div>
             <SiteLink className="button button-primary mobile-nav-action" href="/contact" onClick={closeMenu}>
-              Plan gesprek
+              Plan een gesprek
             </SiteLink>
           </nav>
         </div>
