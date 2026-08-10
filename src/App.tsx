@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PageBlocks, { PageHero } from "./components/PageBlocks";
-import { getPage } from "./content/site";
+import { getPage, type Page } from "./content/site";
+import { getPublishedPage } from "./cms/cmsApi";
 import { absoluteUrl, siteConfig } from "./config/site";
 
 function upsertNamedMeta(name: string, content: string) {
@@ -69,13 +70,25 @@ function upsertOrganizationData() {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState(() => window.location.pathname || "/");
-  const page = useMemo(() => getPage(currentPath), [currentPath]);
+  const fallbackPage = useMemo(() => getPage(currentPath), [currentPath]);
+  const [page, setPage] = useState<Page>(fallbackPage);
 
   useEffect(() => {
     const syncPath = () => setCurrentPath(window.location.pathname || "/");
     window.addEventListener("popstate", syncPath);
     return () => window.removeEventListener("popstate", syncPath);
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    setPage(fallbackPage);
+    void getPublishedPage(fallbackPage.path).then((cmsPage) => {
+      if (active && cmsPage) setPage(cmsPage);
+    });
+    return () => {
+      active = false;
+    };
+  }, [fallbackPage]);
 
   useEffect(() => {
     const canonical = absoluteUrl(page.path);
