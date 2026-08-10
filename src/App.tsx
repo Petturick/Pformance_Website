@@ -111,7 +111,7 @@ export default function App() {
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} currentPath={page.path} />
       <main id="main-content">
         <PageHero page={page} />
-        <PageBlocks blocks={page.blocks} />
+        <PageBlocks blocks={page.blocks} pagePath={page.path} />
       </main>
       <Footer />
     </div>
