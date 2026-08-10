@@ -1,0 +1,394 @@
+/* Final visual refinement based on Pformance Brandbook v3.2 and the approved website moodboard. */
+
+:root {
+  --moodboard-shell: min(1240px, calc(100vw - 64px));
+}
+
+.shell { width: var(--moodboard-shell); }
+
+/* Official raster lockup from the Brandbook. */
+.brand-logo-image-lockup {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 196px;
+  height: 54px;
+  flex: 0 0 auto;
+}
+.brand-logo-image {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: block;
+  width: 196px;
+  height: auto;
+  object-fit: contain;
+}
+.brand-logo-image-dark { display: none; }
+html[data-theme="dark"] .brand-logo-image-light { display: none; }
+html[data-theme="dark"] .brand-logo-image-dark { display: block; }
+.brand-logo-forced-inverse .brand-logo-image-light { display: none; }
+.brand-logo-forced-inverse .brand-logo-image-dark { display: block; }
+.brand-logo-compact { width: 42px; height: 42px; }
+.brand-logo-compact .brand-logo-image { width: 42px; height: 42px; object-fit: contain; }
+.site-logo { min-width: 196px; }
+
+/* Header: more editorial, less application chrome. */
+.site-header-inner { min-height: 78px; }
+.site-header { box-shadow: none; }
+.desktop-nav { gap: 12px; }
+.nav-link { font-size: 13px; font-weight: 600; letter-spacing: -.005em; padding-inline: 8px; }
+.header-tools { gap: 10px; }
+.header-action { min-height: 40px; padding: 8px 15px; font-size: 13px; }
+
+/* Theme control: one quiet icon, Auto remains the default preference. */
+.theme-control { position: relative; display: inline-flex; }
+.theme-trigger {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.theme-trigger:hover,
+.theme-trigger[aria-expanded="true"] {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--brand-cyan) 55%, var(--line));
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.theme-menu {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 248px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  box-shadow: 0 18px 50px rgba(11, 28, 58, .14);
+  backdrop-filter: blur(20px) saturate(140%);
+}
+.theme-menu-option {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 22px 1fr 18px;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.theme-menu-option:hover { background: var(--surface-soft); }
+.theme-menu-option.is-active { background: rgba(34, 199, 219, .08); }
+.theme-menu-copy { display: grid; gap: 2px; }
+.theme-menu-copy strong { font-size: 12px; font-weight: 650; }
+.theme-menu-copy small { color: var(--text-muted); font-size: 10px; line-height: 1.35; }
+.theme-menu-check { color: var(--brand-cyan); }
+
+/* Home hero: the Brandbook flow becomes the composition, not a card on the right. */
+.page-hero-home {
+  position: relative;
+  isolation: isolate;
+  min-height: 680px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(242, 167, 187, .045), transparent 28%),
+    var(--page-bg);
+}
+.page-hero-home .hero-grid {
+  position: relative;
+  min-height: 680px;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding-block: 96px 104px;
+}
+.page-hero-home .hero-copy {
+  position: relative;
+  z-index: 3;
+  width: min(690px, 58vw);
+  max-width: 690px;
+}
+.page-hero-home .hero-copy h1 {
+  max-width: 700px;
+  font-size: clamp(54px, 5.4vw, 76px);
+  line-height: 1.015;
+  letter-spacing: -.055em;
+}
+.page-hero-home .hero-intro { max-width: 560px; font-size: 17px; }
+.page-hero-home .hero-art-home {
+  position: absolute;
+  z-index: 1;
+  top: 45px;
+  right: -100px;
+  bottom: 0;
+  width: min(760px, 62vw);
+  min-height: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: url('/pformance-flow-brandbook.webp') center right / contain no-repeat;
+  opacity: .82;
+  pointer-events: none;
+}
+.page-hero-home .hero-art-home:before,
+.page-hero-home .hero-art-home:after,
+.page-hero-home .hero-art-home > * { display: none; }
+html[data-theme="dark"] .page-hero-home .hero-art-home {
+  opacity: .52;
+  filter: saturate(.95) brightness(1.08);
+}
+
+/* A thin brand transition after the hero creates the moodboard rhythm without invented client logos. */
+.page-hero-home:after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34,199,219,.42), rgba(242,167,187,.42), transparent);
+}
+
+/* Brandbook photography in page heroes. */
+.page-hero-oplossingen .hero-art-home,
+.hero-art-advisory,
+.hero-art-build,
+.hero-art-about {
+  min-height: 390px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-brand);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.page-hero-oplossingen .hero-art-home {
+  background-image: linear-gradient(180deg, rgba(11,28,58,.02), rgba(11,28,58,.08)), url('/visual-human-intelligence.jpg');
+}
+.page-hero-oplossingen .hero-art-home:before,
+.page-hero-oplossingen .hero-art-home:after,
+.page-hero-oplossingen .hero-art-home > * { display: none; }
+.hero-art-advisory {
+  padding: 0;
+  background-image: linear-gradient(180deg, rgba(11,28,58,.02), rgba(11,28,58,.12)), url('/visual-making-progress.jpg');
+}
+.hero-art-advisory > * { display: none; }
+.hero-art-build {
+  padding: 0;
+  background-image: linear-gradient(180deg, rgba(6,21,43,.08), rgba(6,21,43,.26)), url('/visual-systems-in-action.jpg');
+}
+.hero-art-build .ui-shell { display: none; }
+.hero-art-build .ui-accent-chip {
+  top: auto;
+  left: 24px;
+  right: auto;
+  bottom: 24px;
+  background: rgba(34,199,219,.92);
+  backdrop-filter: blur(8px);
+}
+.hero-art-about {
+  background-image: linear-gradient(180deg, rgba(11,28,58,.02), rgba(11,28,58,.16)), url('/visual-human-intelligence.jpg');
+}
+.hero-art-about > * { display: none; }
+
+/* Keep the remaining hero systems restrained and visually consistent. */
+.hero-art-resources,
+.hero-art-cases,
+.hero-art-contact { border-radius: 18px; }
+.page-hero:not(.page-hero-home) .hero-grid { gap: 72px; }
+
+/* Home pillar section: open editorial columns, like the moodboard. */
+.page-body-home > .feature-section:first-child { padding-top: 78px; padding-bottom: 82px; }
+.page-body-home > .feature-section:first-child .section-intro { max-width: 760px; margin-bottom: 42px; }
+.page-body-home > .feature-section:first-child .feature-grid {
+  gap: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+.page-body-home > .feature-section:first-child .feature-card {
+  min-height: 236px;
+  padding: 8px 30px 8px 0;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: transparent;
+}
+.page-body-home > .feature-section:first-child .feature-card:not(:first-child) { padding-left: 30px; }
+.page-body-home > .feature-section:first-child .feature-card:last-child { border-right: 0; padding-right: 0; }
+.page-body-home > .feature-section:first-child .feature-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 28px;
+  border: 0;
+  background: transparent;
+}
+.page-body-home > .feature-section:first-child .feature-card:nth-child(3) .feature-icon,
+.page-body-home > .feature-section:first-child .feature-card:nth-child(4) .feature-icon { color: var(--brand-rose); }
+.page-body-home > .feature-section:first-child .card-link { margin-top: 18px; }
+
+/* Proof section: dark, visual, and grounded in the Brandbook Systems in action direction. */
+.page-body-home > .split-dark { padding-block: 0; }
+.page-body-home > .split-dark .split-grid {
+  min-height: 500px;
+  grid-template-columns: minmax(0, .92fr) minmax(440px, 1.08fr);
+  gap: 70px;
+  padding-block: 68px;
+}
+.page-body-home > .split-dark .split-mark {
+  min-height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(6,21,43,.04), rgba(6,21,43,.18)),
+    url('/visual-systems-in-action.jpg') center / cover no-repeat;
+  box-shadow: 0 26px 70px rgba(0,0,0,.24);
+}
+.page-body-home > .split-dark .split-mark span { display: none; }
+
+/* Solutions on home are deliberately larger than the four brand pillars. */
+.page-body-home > .feature-section:nth-child(3) .feature-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  border: 0;
+  background: transparent;
+}
+.page-body-home > .feature-section:nth-child(3) .feature-card {
+  position: relative;
+  min-height: 330px;
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.page-body-home > .feature-section:nth-child(3) .feature-card:after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -52px;
+  bottom: -68px;
+  border-radius: 50%;
+  border: 20px solid rgba(34,199,219,.08);
+}
+.page-body-home > .feature-section:nth-child(3) .feature-card:nth-child(2):after { border-color: rgba(242,167,187,.10); }
+
+/* Lab / progress section uses the third photography direction from the Brandbook. */
+.page-body-home > .split-soft .split-mark {
+  min-height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(11,28,58,.01), rgba(11,28,58,.08)),
+    url('/visual-making-progress.jpg') center / cover no-repeat;
+}
+.page-body-home > .split-soft .split-mark span { display: none; }
+
+/* Cards and resources: reduce generic SaaS styling. */
+.feature-card,
+.case-card,
+.process-grid,
+.contact-form { border-radius: 12px; }
+.case-card { box-shadow: none; }
+.case-card:hover { border-color: color-mix(in srgb, var(--brand-cyan) 36%, var(--line)); }
+.resource-row { padding-block: 30px; }
+.resource-row:hover h3 { color: var(--brand-cyan); }
+
+/* Dark mode stays controlled and editorial instead of becoming a glowing tech skin. */
+html[data-theme="dark"] .site-header { background: rgba(8,23,46,.93); }
+html[data-theme="dark"] .page-hero-home {
+  background:
+    radial-gradient(circle at 76% 14%, rgba(34,199,219,.045), transparent 30%),
+    var(--page-bg);
+}
+html[data-theme="dark"] .theme-menu { box-shadow: 0 22px 54px rgba(0,0,0,.32); }
+html[data-theme="dark"] .page-body-home > .feature-section:first-child .feature-card { background: transparent; }
+
+@media (max-width: 1120px) {
+  :root { --moodboard-shell: min(100% - 44px, 1120px); }
+  .brand-logo-image-lockup { width: 174px; height: 48px; }
+  .brand-logo-image { width: 174px; }
+  .site-logo { min-width: 174px; }
+  .desktop-nav { gap: 4px; }
+  .nav-link { font-size: 12px; padding-inline: 6px; }
+  .page-hero-home .hero-art-home { right: -150px; width: 70vw; opacity: .72; }
+}
+
+@media (max-width: 860px) {
+  :root { --moodboard-shell: min(100% - 36px, 760px); }
+  .brand-logo-image-lockup { width: 164px; height: 46px; }
+  .brand-logo-image { width: 164px; }
+  .site-logo { min-width: 164px; }
+  .mobile-theme { padding: 10px 0 2px; }
+  .mobile-theme .theme-control { width: 100%; justify-content: flex-start; }
+  .mobile-theme .theme-trigger { width: 40px; height: 40px; }
+  .mobile-theme .theme-menu { left: 0; right: auto; top: calc(100% + 6px); }
+
+  .page-hero-home,
+  .page-hero-home .hero-grid { min-height: 650px; }
+  .page-hero-home .hero-grid { padding-block: 72px 170px; }
+  .page-hero-home .hero-copy { width: 100%; max-width: 620px; }
+  .page-hero-home .hero-art-home {
+    top: auto;
+    left: 18%;
+    right: -100px;
+    bottom: -60px;
+    width: 92%;
+    height: 360px;
+    opacity: .54;
+  }
+  .page-hero-oplossingen .hero-art-home,
+  .hero-art-advisory,
+  .hero-art-build,
+  .hero-art-about { min-height: 300px; }
+
+  .page-body-home > .feature-section:first-child .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .page-body-home > .feature-section:first-child .feature-card,
+  .page-body-home > .feature-section:first-child .feature-card:not(:first-child) {
+    padding: 26px 24px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-body-home > .feature-section:first-child .feature-card:nth-child(odd) { border-right: 1px solid var(--line); }
+  .page-body-home > .split-dark .split-grid { grid-template-columns: 1fr; min-height: 0; }
+  .page-body-home > .split-dark .split-mark { min-height: 320px; }
+}
+
+@media (max-width: 640px) {
+  :root { --moodboard-shell: min(100% - 28px, 620px); }
+  .brand-logo-image-lockup { width: 154px; height: 43px; }
+  .brand-logo-image { width: 154px; }
+  .site-logo { min-width: 154px; }
+  .page-hero-home,
+  .page-hero-home .hero-grid { min-height: 610px; }
+  .page-hero-home .hero-grid { padding-block: 58px 150px; }
+  .page-hero-home .hero-copy h1 { font-size: clamp(43px, 12.2vw, 58px); }
+  .page-hero-home .hero-intro { font-size: 16px; }
+  .page-hero-home .hero-art-home { left: 8%; right: -70px; width: 110%; height: 300px; bottom: -48px; }
+  .page-body-home > .feature-section:first-child .feature-grid { grid-template-columns: 1fr; }
+  .page-body-home > .feature-section:first-child .feature-card,
+  .page-body-home > .feature-section:first-child .feature-card:not(:first-child) {
+    padding: 26px 0;
+    border-right: 0;
+  }
+  .page-body-home > .feature-section:nth-child(3) .feature-grid { grid-template-columns: 1fr; }
+  .page-body-home > .feature-section:nth-child(3) .feature-card { min-height: 280px; }
+  .theme-menu { width: min(248px, calc(100vw - 32px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-trigger,
+  .theme-menu-option { transition: none !important; }
+}

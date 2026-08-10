@@ -1,0 +1,50 @@
+/* Visual assets for the final Pformance moodboard direction. */
+
+.page-hero-home .hero-art-home {
+  background-image: url('/pformance-flow-brandbook.svg');
+  background-position: center right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.page-hero-oplossingen .hero-art-home {
+  background-image:
+    linear-gradient(180deg, rgba(11,28,58,.02), rgba(11,28,58,.12)),
+    url('https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1800');
+}
+
+.hero-art-advisory {
+  background-image:
+    linear-gradient(180deg, rgba(11,28,58,.02), rgba(11,28,58,.14)),
+    url('https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1800');
+}
+
+.hero-art-build {
+  background-image:
+    linear-gradient(180deg, rgba(6,21,43,.08), rgba(6,21,43,.30)),
+    url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1800');
+}
+
+.hero-art-about {
+  background-image:
+    linear-gradient(180deg, rgba(11,28,58,.02), rgba(11,28,58,.18)),
+    url('https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1800');
+}
+
+.page-body-home > .split-dark .split-mark {
+  background:
+    linear-gradient(180deg, rgba(6,21,43,.04), rgba(6,21,43,.22)),
+    url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1800') center / cover no-repeat;
+}
+
+.page-body-home > .split-soft .split-mark {
+  background:
+    linear-gradient(180deg, rgba(250,247,243,.08), rgba(250,247,243,.18)),
+    url('/pformance-flow-brandbook.svg') center / cover no-repeat;
+}
+
+html[data-theme="dark"] .page-hero-oplossingen .hero-art-home,
+html[data-theme="dark"] .hero-art-advisory,
+html[data-theme="dark"] .hero-art-about {
+  background-blend-mode: multiply, normal;
+}
