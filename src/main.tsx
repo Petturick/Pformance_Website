@@ -7,6 +7,7 @@ import "./styles/global.css";
 import "./styles/overrides.css";
 import "./styles/redesign.css";
 import "./styles/brandbook-v3.css";
+import "./styles/moodboard-final.css";
 
 const isAdminRoute = window.location.pathname === "/admin" || window.location.pathname.startsWith("/admin/");
 
