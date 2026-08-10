@@ -3,20 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="description" content="Pformance combineert marketing leadership, digitale productontwikkeling en praktische uitvoering in oplossingen die werken." />
+    <meta name="theme-color" content="#FAF7F3" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Pformance is een commerciële technologiepartner die strategie, technologie en uitvoering verbindt in systemen die werken en blijven werken." />
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pformance" />
-    <meta property="og:title" content="Pformance | Van commerciële uitdaging naar werkende oplossing" />
-    <meta property="og:description" content="Strategie, digitale productontwikkeling en praktische uitvoering in één heldere lijn." />
+    <meta property="og:title" content="Pformance | Van commerciële uitdaging naar werkend systeem" />
+    <meta property="og:description" content="Strategie, technologie en uitvoering verbonden in één werkend commercieel systeem." />
     <meta property="og:url" content="https://pformance.nl/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pformance | Van commerciële uitdaging naar werkend systeem" />
+    <meta name="twitter:description" content="Strategie, technologie en uitvoering verbonden in één werkend commercieel systeem." />
     <link rel="canonical" href="https://pformance.nl/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-    <title>Pformance | Van commerciële uitdaging naar werkende oplossing</title>
+    <script>
+      (() => {
+        try {
+          const stored = localStorage.getItem('pformance_theme_preference') || 'auto';
+          const hour = new Date().getHours();
+          const theme = stored === 'dark' || (stored === 'auto' && (hour >= 19 || hour < 7)) ? 'dark' : 'light';
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.dataset.themePreference = stored;
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {}
+      })();
+    </script>
+    <title>Pformance | Van commerciële uitdaging naar werkend systeem</title>
   </head>
   <body>
     <div id="root"></div>
