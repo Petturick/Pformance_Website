@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 36" role="img" aria-label="Pformance beeldmerk invers">
-  <path d="M17 5h10a10 10 0 0 1 0 20H17a10 10 0 1 1 0-20Z" fill="none" stroke="#F7F7F4" stroke-width="7" stroke-linecap="round"/>
-  <path d="M31 11H21a10 10 0 0 0 0 20h10a10 10 0 1 0 0-20Z" fill="none" stroke="#1F63FF" stroke-width="7" stroke-linecap="round"/>
-  <rect x="20" y="13" width="8" height="10" rx="1" fill="#061C48"/>
+  <path d="M17 5h10a10 10 0 0 1 0 20H17a10 10 0 1 1 0-20Z" fill="none" stroke="#FAF7F3" stroke-width="7" stroke-linecap="round"/>
+  <path d="M31 11H21a10 10 0 0 0 0 20h10a10 10 0 1 0 0-20Z" fill="none" stroke="#22C7DB" stroke-width="7" stroke-linecap="round"/>
+  <rect x="20" y="13" width="8" height="10" rx="1" fill="#F2A7BB"/>
 </svg>
