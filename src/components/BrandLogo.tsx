@@ -4,8 +4,8 @@ type BrandLogoProps = {
 };
 
 export default function BrandLogo({ compact = false, inverse = false }: BrandLogoProps) {
-  const lightSrc = compact ? "/pformance-mark-official.png" : "/pformance-logo-official.png";
-  const darkSrc = compact ? "/pformance-mark-official-dark.png" : "/pformance-logo-official-dark.png";
+  const lightSrc = compact ? "/pformance-mark-official.svg" : "/pformance-logo-official.svg";
+  const darkSrc = compact ? "/pformance-mark-official-dark.svg" : "/pformance-logo-official-dark.svg";
 
   return (
     <span
