@@ -9,18 +9,17 @@ export default function Footer() {
       <div className="shell footer-grid">
         <div className="footer-brand">
           <SiteLink href="/" aria-label="Pformance home">
-            <BrandLogo />
+            <BrandLogo inverse />
           </SiteLink>
           <p>Strategisch. Duidelijk. Presteren.</p>
-          <p className="footer-small">Van commerciële uitdaging naar werkende oplossing.</p>
+          <p className="footer-small">Van commerciële uitdaging naar werkend systeem.</p>
         </div>
 
         <div>
           <h2 className="footer-heading">Navigatie</h2>
           <nav className="footer-nav" aria-label="Footer navigatie">
-            {navigationItems.map((item) => (
-              <SiteLink key={item.href} href={item.href}>{item.label}</SiteLink>
-            ))}
+            {navigationItems.map((item) => <SiteLink key={item.href} href={item.href}>{item.label}</SiteLink>)}
+            <SiteLink href="/contact">Contact</SiteLink>
           </nav>
         </div>
 
