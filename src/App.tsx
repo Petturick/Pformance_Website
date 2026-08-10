@@ -53,6 +53,7 @@ function upsertOrganizationData() {
     legalName: siteConfig.legalName,
     url: siteConfig.url,
     email: siteConfig.email,
+    description: "Commerciële technologiepartner die strategie, technologie en uitvoering verbindt in werkende systemen.",
     identifier: [
       { "@type": "PropertyValue", name: "KVK", value: siteConfig.chamberOfCommerce },
       { "@type": "PropertyValue", name: "BTW", value: siteConfig.vatNumber },
@@ -85,9 +86,7 @@ export default function App() {
     void getPublishedPage(fallbackPage.path).then((cmsPage) => {
       if (active && cmsPage) setPage(cmsPage);
     });
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, [fallbackPage]);
 
   useEffect(() => {
@@ -97,6 +96,9 @@ export default function App() {
 
     upsertNamedMeta("description", page.metaDescription);
     upsertNamedMeta("robots", "index, follow");
+    upsertNamedMeta("twitter:card", "summary_large_image");
+    upsertNamedMeta("twitter:title", page.metaTitle);
+    upsertNamedMeta("twitter:description", page.metaDescription);
     upsertPropertyMeta("og:type", "website");
     upsertPropertyMeta("og:site_name", siteConfig.name);
     upsertPropertyMeta("og:title", page.metaTitle);
@@ -108,9 +110,7 @@ export default function App() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
   useEffect(() => {
