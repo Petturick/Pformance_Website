@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="shell footer-grid">
         <div className="footer-brand">
           <SiteLink href="/" aria-label="Pformance home">
-            <BrandLogo inverse />
+            <BrandLogo />
           </SiteLink>
           <p>Strategisch. Duidelijk. Presteren.</p>
           <p className="footer-small">Van commerciële uitdaging naar werkend systeem.</p>

@@ -37,7 +37,7 @@ function ActionLink({ action }: { action: Action }) {
   return (
     <SiteLink className={className} href={action.href}>
       {action.label}
-      {style === "ghost" ? <ArrowRight size={16} /> : <ArrowUpRight size={16} />}
+      <ArrowRight size={16} />
     </SiteLink>
   );
 }
@@ -60,6 +60,22 @@ function HomeHeroVisual() {
       <div className="hero-accent hero-accent-teal" />
       <div className="hero-caption">Strategie · Technologie · Uitvoering</div>
     </div>
+  );
+}
+
+function HomeTrustBar() {
+  return (
+    <section className="home-trust" aria-label="Pformance aanpak">
+      <div className="shell home-trust-inner">
+        <p>Een partner voor commerciële verandering</p>
+        <div className="home-trust-principles" aria-label="Strategie, technologie en uitvoering">
+          <span>Strategie</span>
+          <span>Technologie</span>
+          <span>Uitvoering</span>
+          <strong>Één systeem</strong>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -185,7 +201,7 @@ export function PageHero({ page }: { page: Page }) {
 
 function FeatureGrid({ block, pagePath }: { block: Extract<Block, { type: "features" }>; pagePath: string }) {
   const key = pageKey(pagePath);
-  const hideIcons = pagePath === "/over" || pagePath === "/contact";
+  const hideIcons = pagePath === "/contact";
 
   return (
     <section className={`section-block feature-section feature-section-${key}`}>
@@ -196,7 +212,7 @@ function FeatureGrid({ block, pagePath }: { block: Extract<Block, { type: "featu
             const Icon = featureIcons[index % featureIcons.length];
             const body = (
               <>
-                {!hideIcons ? <div className="feature-icon"><Icon size={22} /></div> : <span className="feature-index">0{index + 1}</span>}
+                {!hideIcons ? <div className="feature-icon"><Icon size={22} strokeWidth={1.7} /></div> : <span className="feature-index">0{index + 1}</span>}
                 {item.eyebrow ? <p className="card-eyebrow">{item.eyebrow}</p> : null}
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
@@ -324,7 +340,18 @@ function SplitBlock({ block, pagePath }: { block: Extract<Block, { type: "split"
           ) : null}
           {block.action ? <ActionLink action={block.action} /> : null}
         </div>
-        <div className="split-mark" aria-hidden="true"><span /><span /></div>
+        <div className="split-mark" aria-hidden="true">
+          {pagePath === "/" && tone === "dark" ? (
+            <div className="system-preview">
+              <div className="system-preview-nav"><i /><i /><i /><i /><i /></div>
+              <div className="system-preview-main">
+                <div className="system-preview-title"><span /><b /></div>
+                <div className="system-preview-metrics"><i /><i /><i /></div>
+                <div className="system-preview-chart"><span /><span /><span /><span /><span /><span /></div>
+              </div>
+            </div>
+          ) : <><span /><span /></>}
+        </div>
       </div>
     </section>
   );
@@ -428,6 +455,7 @@ function ContactBlock({ block }: { block: Extract<Block, { type: "contact" }> })
 export default function PageBlocks({ blocks, pagePath }: { blocks: Block[]; pagePath: string }) {
   return (
     <div className={`page-body page-body-${pageKey(pagePath)}`}>
+      {pagePath === "/" ? <HomeTrustBar /> : null}
       {blocks.map((block, index) => {
         const key = `${block.type}-${index}`;
         switch (block.type) {
