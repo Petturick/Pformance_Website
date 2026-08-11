@@ -53,7 +53,7 @@ function upsertOrganizationData() {
     legalName: siteConfig.legalName,
     url: siteConfig.url,
     email: siteConfig.email,
-    description: "Commerciële technologiepartner die strategie, technologie en uitvoering verbindt in werkende systemen.",
+    description: "Partner voor commerciële marketinguitdagingen die marketingstrategie, technologie en uitvoering verbindt in schaalbare systemen.",
     identifier: [
       { "@type": "PropertyValue", name: "KVK", value: siteConfig.chamberOfCommerce },
       { "@type": "PropertyValue", name: "BTW", value: siteConfig.vatNumber },
