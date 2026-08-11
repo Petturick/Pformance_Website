@@ -4,9 +4,7 @@ import App from "./App";
 import AdminApp from "./admin/AdminApp";
 import { ThemeProvider } from "./theme/ThemeProvider";
 import "./styles/global.css";
-import "./styles/overrides.css";
 import "./styles/redesign.css";
-import "./styles/brandbook-v3.css";
 import "./styles/approved-moodboard.css";
 
 const isAdminRoute = window.location.pathname === "/admin" || window.location.pathname.startsWith("/admin/");

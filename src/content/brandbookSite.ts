@@ -7,6 +7,8 @@ export const casePlaceholders: Case[] = [
     challenge: "Versnipperde productinformatie, handmatig beheer en onvoldoende grip op distributie naar kanalen.",
     publication: "Volledige klantcase wordt gepubliceerd zodra klantnaam, aanpak en resultaten zijn gevalideerd en vrijgegeven.",
     status: "Case in voorbereiding",
+    imageUrl: "/visual-case-pim.svg",
+    imageAlt: "Illustratie van centraal productdatabeheer en distributie naar commerciële kanalen",
   },
   {
     title: "Pricing intelligence",
@@ -14,6 +16,8 @@ export const casePlaceholders: Case[] = [
     challenge: "Handmatig prijs- en concurrentieonderzoek vertalen naar een schaalbaar systeem voor commerciële beslissingen.",
     publication: "Resultaatclaims worden alleen gepubliceerd met aantoonbare bron en context.",
     status: "Case in voorbereiding",
+    imageUrl: "/visual-case-pricing.svg",
+    imageAlt: "Illustratie van prijsmonitoring, marktvergelijking en commerciële besluitvorming",
   },
   {
     title: "Digitale onboarding",
@@ -21,18 +25,20 @@ export const casePlaceholders: Case[] = [
     challenge: "Losse documenten en kennis samenbrengen in een gestructureerd systeem voor onboarding en voortgang.",
     publication: "Bewijs, screenshots en resultaten volgen na inhoudelijke validatie.",
     status: "Case in voorbereiding",
+    imageUrl: "/visual-case-onboarding.svg",
+    imageAlt: "Illustratie van een digitale onboarding met leerroute, voortgang en adoptie",
   },
 ];
 
 const home: Page = {
   path: "/",
-  metaTitle: "Pformance | Van commerciële uitdaging naar werkend systeem",
-  metaDescription: "Pformance is een commerciële technologiepartner die strategie, technologie en uitvoering verbindt in systemen die werken en blijven werken.",
+  metaTitle: "Pformance | Van commerciële marketinguitdaging naar groeisysteem",
+  metaDescription: "Pformance verbindt marketingstrategie, technologie en uitvoering in schaalbare commerciële systemen die groei, grip en uitvoering versterken.",
   hero: {
-    eyebrow: "Commerciële technologiepartner",
-    title: "Van commerciële uitdaging naar",
-    highlight: "werkend systeem.",
-    intro: "Wij verbinden strategie, technologie en uitvoering om commerciële ambities te vertalen naar schaalbare systemen die werken en blijven werken.",
+    eyebrow: "Marketing leadership en digitale systemen",
+    title: "Van commerciële marketinguitdaging naar",
+    highlight: "werkend groeisysteem.",
+    intro: "Wij verbinden marketingstrategie, technologie en uitvoering om commerciële marketinguitdagingen te vertalen naar schaalbare systemen die aantoonbaar bijdragen aan groei en blijven werken.",
     primary: { label: "Plan een gesprek", href: "/contact", style: "primary" },
     secondary: { label: "Bekijk cases", href: "/klantcases", style: "secondary" },
     visual: "orbit",
@@ -41,23 +47,23 @@ const home: Page = {
     {
       type: "features",
       eyebrow: "Waarom Pformance",
-      title: "Strategie, technologie en uitvoering in één systeem.",
-      intro: "Geen traditioneel marketingbureau en geen puur softwarebedrijf. We starten bij het commerciële probleem en bouwen van daaruit de juiste oplossing.",
+      title: "Van marketingvraagstuk naar bestuurbare commerciële groei.",
+      intro: "Geen traditioneel marketingbureau en geen puur softwarebedrijf. We beginnen bij de commerciële marketinguitdaging en verbinden richting, mensen, kanalen, data en technologie in één aanpak.",
       columns: 4,
       items: [
-        { eyebrow: "01", title: "Strategie & richting", text: "We vertalen ambitie naar heldere keuzes, focus en een gedragen strategie.", href: "/advisory" },
-        { eyebrow: "02", title: "Technologie & data", text: "We ontwerpen schaalbare digitale systemen met betrouwbare data als basis.", href: "/build" },
-        { eyebrow: "03", title: "Uitvoering & adoptie", text: "We activeren teams en processen zodat verandering daadwerkelijk landt." },
-        { eyebrow: "04", title: "Resultaat & groei", text: "We leveren meetbare impact die commerciële groei ondersteunt en blijft verbeteren." },
+        { eyebrow: "01", title: "Markt, klant en positionering", text: "We maken scherp waar commerciële waarde ontstaat, voor wie en waarom de organisatie moet worden gekozen.", href: "/advisory" },
+        { eyebrow: "02", title: "Marketing leadership", text: "We brengen focus, eigenaarschap, ritme en besluitvorming in de marketingorganisatie.", href: "/advisory" },
+        { eyebrow: "03", title: "Technologie en data", text: "We verbinden kanalen, klantdata, productdata en tooling tot een schaalbare commerciële basis.", href: "/build" },
+        { eyebrow: "04", title: "Uitvoering en verbetering", text: "We vertalen keuzes naar campagnes, processen en systemen die meetbaar kunnen worden verbeterd." },
       ],
     },
     {
       type: "split",
-      eyebrow: "Van losse onderdelen naar samenhang",
-      title: "Van versnipperde data naar één commercieel platform.",
-      text: "We brengen productdata, processen en besluitvorming samen in een overzichtelijk systeem. Zo ontstaat één werkbare basis voor teams, kanalen en verdere groei.",
-      bullets: ["Eén centrale informatiebasis", "Minder handmatige overdracht", "Duidelijk eigenaarschap", "Inzicht in voortgang en kwaliteit"],
-      action: { label: "Bekijk cases", href: "/klantcases", style: "primary" },
+      eyebrow: "Van losse marketingactiviteiten naar samenhang",
+      title: "Eén commercieel systeem voor richting, uitvoering en groei.",
+      text: "We brengen strategie, proposities, kanalen, data, processen en besluitvorming samen. Zo ontstaat grip op prioriteiten, een voorspelbaarder marketingritme en een schaalbare basis voor commerciële groei.",
+      bullets: ["Heldere commerciële prioriteiten", "Eén ritme voor marketing en sales", "Betrouwbare data en tooling", "Doorlopende meting en verbetering"],
+      action: { label: "Bekijk onze oplossingen", href: "/oplossingen", style: "primary" },
       tone: "dark",
       visual: "product",
     },
@@ -67,8 +73,8 @@ const home: Page = {
       title: "Twee routes naar één werkend systeem.",
       columns: 2,
       items: [
-        { eyebrow: "Advisory", title: "Richting en marketing leadership", text: "Voor organisaties die scherpere keuzes, senior sturing en een beter werkend commercieel model nodig hebben.", href: "/advisory" },
-        { eyebrow: "Build", title: "Digitale systemen en producten", text: "Voor organisaties die processen, data en gebruikers willen verbinden in een bruikbare digitale oplossing.", href: "/build" },
+        { eyebrow: "Advisory", title: "Commerciële richting en marketing leadership", text: "Voor organisaties die scherpere marktkeuzes, senior sturing en een beter werkend marketingmodel nodig hebben.", href: "/advisory" },
+        { eyebrow: "Build", title: "Marketingtechnologie en digitale systemen", text: "Voor organisaties die klantdata, productdata, kanalen en processen willen verbinden in een bruikbare digitale oplossing.", href: "/build" },
       ],
     },
     {
@@ -101,8 +107,8 @@ const home: Page = {
     },
     {
       type: "cta",
-      title: "Laten we je commerciële ambitie vertalen naar een werkend systeem.",
-      text: "Een eerste gesprek is bedoeld om context, probleem en gewenste uitkomst scherp te krijgen.",
+      title: "Welke commerciële marketinguitdaging houdt groei nu tegen?",
+      text: "In een eerste gesprek brengen we het probleem, de commerciële impact en de meest logische route scherp in beeld.",
       primary: { label: "Plan een gesprek", href: "/contact", style: "primary" },
       secondary: { label: "Bekijk onze aanpak", href: "/oplossingen", style: "secondary" },
     },
@@ -112,12 +118,12 @@ const home: Page = {
 const solutions: Page = {
   path: "/oplossingen",
   metaTitle: "Oplossingen | Pformance",
-  metaDescription: "Van strategie en marketing leadership tot digitale systemen, data en automatisering. Ontdek hoe Pformance commerciële vraagstukken oplost.",
+  metaDescription: "Van commerciële marketingstrategie en leadership tot digitale systemen, data en automatisering. Ontdek hoe Pformance marketinguitdagingen oplost.",
   hero: {
     eyebrow: "Oplossingen",
-    title: "Voor elke commerciële uitdaging een",
+    title: "Voor elke commerciële marketinguitdaging een",
     highlight: "passende route.",
-    intro: "Van strategie en leiderschap tot het bouwen van digitale systemen die verschil maken. We kiezen de route op basis van het probleem, niet op basis van een standaardpakket.",
+    intro: "Van marktkeuze, positionering en marketing leadership tot het bouwen van digitale systemen. We kiezen de route op basis van het commerciële probleem, niet op basis van een standaardpakket.",
     primary: { label: "Plan een gesprek", href: "/contact", style: "primary" },
     secondary: { label: "Bekijk cases", href: "/klantcases", style: "secondary" },
   },
@@ -155,7 +161,7 @@ const solutions: Page = {
 const advisory: Page = {
   path: "/advisory",
   metaTitle: "Advisory | Pformance",
-  metaDescription: "Strategisch marketing leadership, commerciële richting en een werkend marketing operating model voor organisaties die slimmer willen groeien.",
+  metaDescription: "Strategisch marketing leadership, commerciële richting en een bestuurbaar marketingmodel voor organisaties die slimmer willen groeien.",
   hero: {
     eyebrow: "Advisory",
     title: "Strategische richting die",
@@ -167,7 +173,7 @@ const advisory: Page = {
     {
       type: "features",
       eyebrow: "Waar we bij helpen",
-      title: "Van commerciële ambitie naar een bestuurbaar marketing systeem.",
+      title: "Van commerciële ambitie naar een bestuurbaar marketingsysteem.",
       columns: 2,
       items: [
         { title: "Interim & fractional marketing leadership", text: "Senior sturing op prioriteiten, team, resultaat en verandering." },
@@ -203,7 +209,7 @@ const advisory: Page = {
 const build: Page = {
   path: "/build",
   metaTitle: "Build | Pformance",
-  metaDescription: "Pformance ontwerpt en bouwt digitale systemen, producten, PIM oplossingen, dashboards, automatisering en AI toepassingen vanuit commerciële context.",
+  metaDescription: "Pformance bouwt marketingtechnologie, digitale systemen, PIM oplossingen, dashboards, automatisering en AI toepassingen vanuit een commerciële uitdaging.",
   hero: {
     eyebrow: "Build",
     title: "Digitale systemen die",

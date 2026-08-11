@@ -1,7 +1,7 @@
 export type Action = { label: string; href: string; style?: "primary" | "secondary" | "ghost" };
 export type Feature = { title: string; text: string; eyebrow?: string; href?: string };
 export type Step = { number: string; title: string; text: string };
-export type Case = { title: string; sector: string; challenge: string; publication: string; status?: string; href?: string; imageUrl?: string };
+export type Case = { title: string; sector: string; challenge: string; publication: string; status?: string; href?: string; imageUrl?: string; imageAlt?: string };
 export type Resource = { type: string; title: string; text: string; status: string; href?: string };
 
 export type Block =
