@@ -8,6 +8,7 @@ import "./styles/overrides.css";
 import "./styles/redesign.css";
 import "./styles/brandbook-v3.css";
 import "./styles/approved-moodboard.css";
+import "./styles/pformance-v4.css";
 
 const isAdminRoute = window.location.pathname === "/admin" || window.location.pathname.startsWith("/admin/");
 
