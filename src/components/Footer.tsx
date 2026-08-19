@@ -12,7 +12,7 @@ export default function Footer() {
             <BrandLogo />
           </SiteLink>
           <p>Strategisch. Duidelijk. Presteren.</p>
-          <p className="footer-small">Van commerciële marketinguitdaging naar werkend groeisysteem.</p>
+          <p className="footer-small">Van commerciële uitdaging naar werkend systeem.</p>
         </div>
 
         <div>

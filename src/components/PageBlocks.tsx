@@ -67,7 +67,7 @@ function HomeTrustBar() {
   return (
     <section className="home-trust" aria-label="Pformance aanpak">
       <div className="shell home-trust-inner">
-        <p>Voor commerciële marketingvraagstukken die meer vragen dan een losse campagne</p>
+        <p>Een partner voor commerciële verandering</p>
         <div className="home-trust-principles" aria-label="Strategie, technologie en uitvoering">
           <span>Strategie</span>
           <span>Technologie</span>
@@ -76,17 +76,6 @@ function HomeTrustBar() {
         </div>
       </div>
     </section>
-  );
-}
-
-function SolutionsHeroVisual() {
-  return (
-    <div className="hero-art hero-art-solutions" aria-hidden="true">
-      <div className="commercial-signal commercial-signal-market"><span>Markt</span><strong>Waar ligt de groeiruimte?</strong></div>
-      <div className="commercial-signal commercial-signal-customer"><span>Klant</span><strong>Welke waarde overtuigt?</strong></div>
-      <div className="commercial-signal commercial-signal-channel"><span>Kanalen</span><strong>Wat levert aantoonbaar bij?</strong></div>
-      <div className="commercial-outcome"><span>Strategie</span><span>Technologie</span><span>Uitvoering</span><strong>Commerciële groei</strong></div>
-    </div>
   );
 }
 
@@ -175,7 +164,6 @@ function ContactHeroVisual() {
 
 function PageHeroVisual({ page }: { page: Page }) {
   switch (page.path) {
-    case "/oplossingen": return <SolutionsHeroVisual />;
     case "/advisory": return <AdvisoryHeroVisual />;
     case "/build": return <BuildHeroVisual />;
     case "/klantcases": return <CasesHeroVisual />;
@@ -284,17 +272,11 @@ function CasesBlock({ block, pagePath }: { block: Extract<Block, { type: "cases"
                 <span>{item.sector}</span>
                 {item.status ? <span className="status-pill">{item.status}</span> : null}
               </div>
-              {item.imageUrl ? (
-                <div className="case-visual case-visual-image">
-                  <img src={item.imageUrl} alt={item.imageAlt ?? `${item.title} illustratie`} loading="lazy" width="1200" height="700" />
-                </div>
-              ) : (
-                <div className="case-visual" aria-hidden="true">
-                  <span className="case-visual-number">0{index + 1}</span>
-                  <div className="case-visual-line" />
-                  <div className="case-visual-bars"><i /><i /><i /></div>
-                </div>
-              )}
+              <div className="case-visual" aria-hidden="true">
+                <span className="case-visual-number">0{index + 1}</span>
+                <div className="case-visual-line" />
+                <div className="case-visual-bars"><i /><i /><i /></div>
+              </div>
               <h3>{item.title}</h3>
               <p className="case-label">Uitdaging</p>
               <p>{item.challenge}</p>
@@ -340,59 +322,6 @@ function ResourcesBlock({ block }: { block: Extract<Block, { type: "resources" }
   );
 }
 
-function SplitVisual({ block, pagePath, tone }: { block: Extract<Block, { type: "split" }>; pagePath: string; tone: string }) {
-  if (pagePath === "/" && tone === "dark") {
-    return (
-      <div className="system-preview">
-        <div className="system-preview-nav"><i /><i /><i /><i /><i /></div>
-        <div className="system-preview-main">
-          <div className="system-preview-title"><span /><b /></div>
-          <div className="system-preview-metrics"><i /><i /><i /></div>
-          <div className="system-preview-chart"><span /><span /><span /><span /><span /><span /></div>
-        </div>
-      </div>
-    );
-  }
-
-  if (pagePath === "/" && block.eyebrow === "Pformance Lab") {
-    return (
-      <div className="split-semantic split-lab-products">
-        <div><span>01</span><strong>Syntrx</strong><small>Productdata</small></div>
-        <div><span>02</span><strong>PricingTool</strong><small>Prijsinformatie</small></div>
-        <div><span>03</span><strong>Onboarding</strong><small>Kennis en adoptie</small></div>
-      </div>
-    );
-  }
-
-  if (pagePath === "/klantcases" && block.visual === "orbit") {
-    return (
-      <div className="proof-mark-visual">
-        <img src="/pformance-mark-official.svg" alt="" width="95" height="82" />
-      </div>
-    );
-  }
-
-  if (pagePath === "/advisory") {
-    return (
-      <div className="split-semantic split-stakeholders">
-        <span>Directie</span><span>Commercie</span><span>Marketing</span><span>Operations en IT</span>
-        <strong>Gezamenlijke richting</strong>
-      </div>
-    );
-  }
-
-  if (pagePath === "/build") {
-    return (
-      <div className="split-semantic split-blueprint">
-        <span>Data</span><span>Proces</span><span>Interface</span><span>Adoptie</span>
-        <strong>Werkend systeem</strong>
-      </div>
-    );
-  }
-
-  return <><span /><span /></>;
-}
-
 function SplitBlock({ block, pagePath }: { block: Extract<Block, { type: "split" }>; pagePath: string }) {
   const tone = block.tone ?? "light";
   const key = pageKey(pagePath);
@@ -412,7 +341,16 @@ function SplitBlock({ block, pagePath }: { block: Extract<Block, { type: "split"
           {block.action ? <ActionLink action={block.action} /> : null}
         </div>
         <div className="split-mark" aria-hidden="true">
-          <SplitVisual block={block} pagePath={pagePath} tone={tone} />
+          {pagePath === "/" && tone === "dark" ? (
+            <div className="system-preview">
+              <div className="system-preview-nav"><i /><i /><i /><i /><i /></div>
+              <div className="system-preview-main">
+                <div className="system-preview-title"><span /><b /></div>
+                <div className="system-preview-metrics"><i /><i /><i /></div>
+                <div className="system-preview-chart"><span /><span /><span /><span /><span /><span /></div>
+              </div>
+            </div>
+          ) : <><span /><span /></>}
         </div>
       </div>
     </section>
